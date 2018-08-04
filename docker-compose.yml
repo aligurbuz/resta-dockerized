@@ -14,6 +14,16 @@ services:
         image: redis
         ports:
         - "6379:6379"
+    mysql:
+        image: mysql
+        ports:
+        - "33061:3306"
+        - "3306:3306"
+        volumes:
+            - ./mysql:/var/lib/mysql
+        restart: always
+        environment:
+            MYSQL_ROOT_PASSWORD: 280384483082
     php:
         build: .
         image: php:fpm
