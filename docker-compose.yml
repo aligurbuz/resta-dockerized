@@ -16,8 +16,10 @@ services:
         - "6379:6379"
     elasticsearch:
         image: elasticsearch:latest
+        container_name: elasticsearch
         ports:
         - "9200:9200"
+        - "9300:9300"
     mysql:
         image: mysql
         ports:
