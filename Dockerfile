@@ -8,9 +8,8 @@ RUN apt-get update \
         curl \
         sed \
         zlib1g-dev \
-    && docker-php-ext-install \
+        git \
         zip \
-        mysqli \ 
-
-RUN curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer \
-
+        unzip
+RUN cd ~
+RUN sudo curl -sS https://getcomposer.org/installer | php -- --install-dir=/usr/local/bin --filename=composer
