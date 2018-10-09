@@ -2,36 +2,34 @@ version: '2'
 
 services:
     web:
+        container_name: nginx
         image: nginx:latest
         ports:
-            - "80:80"
+        - "80:80"
         volumes:
-            - ./code:/var/www/html
-            - ./site.conf:/etc/nginx/conf.d/default.conf
-        networks:
-            - code-network
+        - ./code:/var/www/html
+        - ./site.conf:/etc/nginx/conf.d/default.conf
     redis:
+        container_name: redis
         image: redis
         ports:
         - "6379:6379"
     mysql:
+        container_name: mysql
         image: mysql
         ports:
         - "33061:3306"
         - "3306:3306"
         volumes:
-            - ./mysql:/var/lib/mysql
+        - ./mysql:/var/lib/mysql
         restart: always
         environment:
             MYSQL_ROOT_PASSWORD: 280384483082
     php:
+        container_name: php
         build: .
         image: php:fpm
         volumes:
-            - ./code:/var/www/html
-        networks:
-            - code-network
-
-networks:
-    code-network:
-        driver: bridge
+        - ./code:/var/www/html
+        links:
+          - redis
